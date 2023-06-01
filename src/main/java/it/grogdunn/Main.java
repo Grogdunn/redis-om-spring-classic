@@ -6,6 +6,18 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
     public static void main(String[] args) {
         ApplicationContext ac = new AnnotationConfigApplicationContext(Config.class);
-        ac.getBean(SaveMeFacade.class).generateScrapData();
+        final var bean = ac.getBean(Facade.class);
+        try {
+            bean.generateScrapData();
+        } catch (Exception e) {
+            System.out.println("Boom, YOLO");
+            e.printStackTrace();
+        }
+        try {
+            bean.enumerateSql();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
